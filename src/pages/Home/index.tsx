@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { AppBar, Avatar, Box, Button, ButtonBase, Container, CssBaseline, Fab, Grid, IconButton, ImageList, ImageListItem, Menu, MenuItem, Toolbar, Typography, Zoom } from "@mui/material"
+import { AppBar, Avatar, Box, Button, ButtonBase, Container, CssBaseline, Fab, Grid, IconButton, ImageList, ImageListItem, Menu, MenuItem, TextField, Toolbar, Typography, Zoom } from "@mui/material"
+import { Link } from 'react-router-dom'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import MenuIcon from "@mui/icons-material/Menu"
 import { styled } from '@mui/material/styles';
@@ -45,11 +46,74 @@ const teamData = [
   },
 ];
 
+const roadMapData = [
+  {
+    id: 1,
+    title: 'AIRDROP',
+    img: '/images/font-back/7681.png',
+    detail: ['Drawing the mutant doodle apes', 'Generating 8888 unique apes', 'Launching Discord, & website', 'Launching giveaways'],
+  },
+  {
+    id: 2,
+    title: 'PUBLIC MINT',
+    img: '/images/font-back/8072.png',
+    detail: ['Public mint', 'Getting listed on marketplaces (Magiceden, Solsea etc.) ', 'Publishing the rarity tool'],
+  },
+  {
+    id: 3,
+    title: '%70 ROYALTIES',
+    img: '/images/font-back/7657.png',
+    detail: ['Releasing MDA DAO for our holders', '70% of all royalties from trading fees are sent back to holders once a month. (You can earn more by holding multiple apes.)'],
+  },
+  {
+    id: 4,
+    title: 'GEN3',
+    img: '/images/font-back/7630.png',
+    detail: ['Making the GEN3 apes', 'Airdropping GEN3 apes to all holders (GEN1 & GEN2 holders)'],
+  },
+];
+
+const faqData = [
+  {
+    qus: `WHAT IS MDA?`,
+    ans: `MDA is a gen2 project. MDA NFTs are made up with over a hundred exciting traits of faces, hair, hats, body and backgrounds. Each MDA is a unique, non-fungible token (NFT) on the Solana blockchain.`,
+    subqus: `WHAT IS THE SALE PRICE AND DATE?`,
+    subans: `0,88 SOL, Jan. 18th 20:00 UTC`,
+  },
+  {
+    qus: `WHY SHOULD I BUY MDA NFT'S?`,
+    ans: `70% of all royalties from trading fees are sent back to holders once a month and this will go unlimited. With this way you can get passive earnings just by holding.`,
+    subqus: `WHAT IS THE ROYALTY PERCENTAGE?`,
+    subans: `%5`,
+  },
+];
+
 const Img = styled('img')({
   margin: 'auto',
   display: 'block',
   maxWidth: '100%',
   maxHeight: '100%',
+});
+
+
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: 'white',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: 'white',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'white',
+    },
+    '&:hover fieldset': {
+      borderColor: 'white',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'white',
+    },
+  },
 });
 
 function Home() {
@@ -81,6 +145,7 @@ function Home() {
       });
     }
   };
+
   return (
     <>
       <CssBaseline />
@@ -168,7 +233,7 @@ function Home() {
               <Typography style={{ color: "white", fontSize: '70px', lineHeight: '60px' }}>
                 70% OF ALL ROYALTIES FROM TRADING FEES ARE SENT BACK TO HOLDERS ONCE A MONTH.
               </Typography>
-              <Button style={{ marginTop: '2em', width: '160px', height: '80px'}} variant="contained">Mint</Button>
+              <Link to="/mint"><Button style={{ marginTop: '2em', width: '160px', height: '80px'}} variant="contained">Mint</Button></Link>
               <hr style={{ marginTop: '2em', marginBottom: '2em' }}/>
               <Typography style={{ color: "white", fontSize:"25px" }}>
                 MINT TIME <br/>
@@ -239,12 +304,55 @@ function Home() {
               <ButtonBase>
                 <Img src={item.img} srcSet={item.img} loading="lazy" alt="" />
               </ButtonBase>
-              <Typography style={{ color: 'white', fontSize: '35px', lineHeight: '1.114em'}}>{item.name}</Typography>
-              <Typography style={{ color: 'white', fontSize: '35px', lineHeight: '1.114em'}}>{item.role}</Typography>
-              <Typography style={{ color: 'white', fontSize: '35px', lineHeight: '1.114em'}}>{item.detail}</Typography>
+              <Grid style={{margin: '1em 2em'}}>
+                <Typography style={{ margin: '1em 0 0', color: 'white', fontSize: '35px', lineHeight: '1.114em', fontWeight: '700'}}>{item.name}</Typography>
+                <Typography style={{ margin: '1em 0', color: 'white', fontSize: '16px', lineHeight: '1.114em'}}>{item.role}</Typography>
+                <Typography style={{ margin: '1em 0', color: 'white', fontSize: '13px', lineHeight: '1.114em'}}>{item.detail}</Typography>
+              </Grid>
             </ImageListItem>
           ))}
         </ImageList>
+      </Container>
+      <Container style={{ maxWidth: "100%", margin: "3em 0" }}>
+        <Img src="/images/MDA-BANNER-4-04-1.jpg" srcSet="/images/MDA-BANNER-4-04-1.jpg" loading="lazy" alt="" />
+      </Container>
+      <Container style={{ maxWidth: "80%" }}>
+        <Grid container style={{color: "white", fontSize: '16px'}}>
+          {roadMapData.map((item) => (
+            <Grid item xs={3} style={{ textAlign: 'center' }}>
+              <Typography style={{ fontSize: '100px', fontWeight: '700', color: 'transparent', backgroundImage: `url(${item.img})`, backgroundSize: 'cover', backgroundClip: 'text' }}>{item.id}</Typography>
+              <Typography style={{ fontSize: '35px', fontWeight: '700'}}>{item.title}</Typography>
+              <ul style={{ textAlign:'left', color: '#7a7a7a' }}>
+                {item.detail.map((txt) => (
+                  <li>{ txt }</li>
+                ))}
+              </ul>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+      <Container style={{ maxWidth: "98%", border: "1px solid white", margin: '0 1%'}}>
+        <Grid container style={{color: "white", fontSize: '16px', padding: '10em 20em'}}>
+          {faqData.map((item) => (
+            <Grid item xs={6}>
+              <Typography style={{ fontSize: '50px', fontWeight: '700', margin: '0.5em 0em'}}>{item.qus}</Typography>
+              <Typography>{item.ans}</Typography>
+              <Typography style={{ fontSize: '25px', fontWeight: '700', margin: '0.75em 0em 0.25em'}}>{item.subqus}</Typography>
+              <Typography>{item.subans}</Typography>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+      <Container style={{ maxWidth: "98%", border: "1px solid white", borderTop: 'none', margin: '0 1%'}}>
+        <Grid container style={{color: "white", padding: '10em 2em'}}>
+          <Grid item xs={1}><Img src="/logo.png" srcSet="/logo.png" alt=""/></Grid>
+          <Grid item xs={3} style={{ alignSelf: "center" }}>Join the community</Grid>
+          <Grid item xs={3} style={{ alignSelf: "center" }}>
+            <Typography style={{ alignSelf: "center" }}>hello@solanadoodleapes.com</Typography>
+            <Typography style={{ fontWeight: '700', alignSelf: "center" }}>Dc.Tw.</Typography>
+          </Grid>
+          <Grid item xs={5} style={{ alignSelf: "center" }}><CssTextField id="standard-basic" label="Need your email here..." variant="standard" /><Button >Sign Up</Button></Grid>
+        </Grid>
       </Container>
     </>
   )
